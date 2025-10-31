@@ -1,0 +1,13 @@
+{
+    "authors": [
+	"Yeonho Jang"
+    ],
+    "copyright": "Copyright © 2025, Yeonho Jang",
+    "dependencies": {
+	"bindbc-sdl": "~>1.5.2"
+    },
+    "targetPath": "bin",
+    "description": "Implementation of COMP 4300 in D language and SDL",
+    "license": "MIT",
+    "name": "dlang_comp_4300"
+}

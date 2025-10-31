@@ -1,0 +1,17 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/dlang_comp_4300
+dlang_comp_4300.so
+dlang_comp_4300.dylib
+dlang_comp_4300.dll
+dlang_comp_4300.a
+dlang_comp_4300.lib
+dlang_comp_4300-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
+bin/

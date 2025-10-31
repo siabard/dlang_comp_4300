@@ -1,0 +1,1 @@
+texture player assets/player.jpg 16 16
