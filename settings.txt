@@ -1,2 +1,3 @@
 window 1024 768
 scene scene_01 scene_01.txt
+texture mychar ./assets/mychar.png

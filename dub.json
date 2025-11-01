@@ -4,7 +4,13 @@
     ],
     "copyright": "Copyright © 2025, Yeonho Jang",
     "dependencies": {
-	"bindbc-sdl": "~>1.5.2"
+	"bindbc-sdl": "~>1.5"
+    },
+    "versions": [
+	"SDL_2_30", "SDL_Image_2_6"
+    ],
+    "subConfigurations": {
+	"bindbc-sdl": "dynamic"
     },
     "targetPath": "bin",
     "description": "Implementation of COMP 4300 in D language and SDL",

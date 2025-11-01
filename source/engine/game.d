@@ -9,9 +9,12 @@ class Game {
   import bindbc.sdl;
   import std.stdio;
   import std.string;
+  import engine.asset_manager;
 
   SDL_Window* window;
   SDL_Renderer* renderer;
+  AssetManager asset_manager;
+
 
   SDL_Event event;
   bool is_running;
@@ -21,9 +24,13 @@ class Game {
   this(SDL_Window* window, SDL_Renderer* renderer) {
     this.window = window;
     this.renderer = renderer;
+    this.asset_manager = new AssetManager;
   }
 
   ~this() {
+    writeln("Game is destroyed");
+    this.asset_manager.clean_up();
+
     if(this.renderer != null) {
       SDL_DestroyRenderer(this.renderer);
     }
@@ -67,6 +74,9 @@ class Game {
 	// scene 정보 등록 
 	SceneSetting ss = { name: lineArray[1], path: lineArray[2] };
 	scene_settings[ lineArray[1] ] = ss;
+      } else  if(lineArray[0] == "texture") {
+	SDL_Texture* texture = IMG_LoadTexture(this.renderer, std.string.toStringz(lineArray[2]) );
+	this.asset_manager.textures[ lineArray[1] ] = texture;
       }
       
     }
@@ -81,6 +91,9 @@ class Game {
   void game_loop() {
     this.is_running = true;
 
+
+    SDL_Rect src_rect = {x: 0, y: 0, w: 120, h: 120};
+    SDL_Rect dst_rect = {x: 0, y: 0, w: 120, h: 120};
     while(this.is_running) {
       while(SDL_PollEvent(&this.event)) {
 	if( this.event.type == SDL_QUIT) {
@@ -89,6 +102,13 @@ class Game {
       }
       
       SDL_RenderClear(this.renderer);
+
+      // texture 노출처리 
+      SDL_RenderCopy(this.renderer, 
+		     this.asset_manager.textures["mychar"],
+		     &src_rect,
+		     &dst_rect);
+		     
       
       SDL_RenderPresent(this.renderer);
     }

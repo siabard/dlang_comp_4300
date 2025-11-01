@@ -4,6 +4,7 @@ import std.stdio;
 import bindbc.sdl;
 import engine.init;
 import engine.game;
+import bindbc.loader;
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
   
 
   int sdlInited = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
+  IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
   if(sdlInited != 0) {
     writeln("SDL2 system cannot be initialized.");
