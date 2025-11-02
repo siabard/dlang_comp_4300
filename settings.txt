@@ -1,3 +1,11 @@
+# window width height
 window 1024 768
+
+# scene [scene name] [path]
 scene scene_01 scene_01.txt
+
+# texture [texture name] [path]
 texture mychar ./assets/mychar.png
+
+# animation [animation name] [texture name] x y w h frames duration loop
+animation mychar_right mychar 0 0 16 16 3 400 Y 
