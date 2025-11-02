@@ -4,8 +4,13 @@ import bindbc.sdl;
 
 class AssetManager {
   import std.stdio;
+  import engine.animation;
+
   // Textures
   SDL_Texture*[string] textures;
+
+  // Animation
+  Animation[string] animation;
 
   this() {
   }
