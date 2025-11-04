@@ -2,7 +2,7 @@ module engine.entity_manager;
 
 class EntityManager {
   import engine.entity;
-  import std.algorithm : remove;
+  import std.algorithm : filter;
   import std.range : array;
 
   int entity_id;
