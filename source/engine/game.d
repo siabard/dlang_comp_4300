@@ -9,7 +9,10 @@ class Game {
   import bindbc.sdl;
   import std.stdio;
   import std.string;
+  import std.conv;
   import engine.asset_manager;
+  import engine.atlas;
+  import engine.animation;
 
   SDL_Window* window;
   SDL_Renderer* renderer;
@@ -77,6 +80,23 @@ class Game {
       } else  if(lineArray[0] == "texture") {
 	SDL_Texture* texture = IMG_LoadTexture(this.renderer, std.string.toStringz(lineArray[2]) );
 	this.asset_manager.textures[ lineArray[1] ] = texture;
+      } else if( lineArray[0] == "atlas") {
+	SDL_Texture* texture = this.asset_manager.textures[ lineArray[2] ];
+	if(texture != null) {
+	  int width = parse!int( lineArray[3] );
+	  int height = parse!int( lineArray[4]);
+	  Atlas atlas = new Atlas( lineArray[1], lineArray[2],  width, height, texture);
+
+	  this.asset_manager.atlases[lineArray[1]] = atlas;
+	}
+      } else if (lineArray[0]  == "animation") {
+	int start_frame = parse!int( lineArray[3] );
+	int frame_length = parse!int( lineArray[4] );
+	float duration = parse!float( lineArray[5] );
+	bool is_loop = lineArray[6] == "Y";
+	
+	Animation anim = new Animation( lineArray[1], lineArray[2], start_frame, frame_length, duration, is_loop);
+	this.asset_manager.animations[ lineArray[1] ] = anim;
       }
       
     }
@@ -103,8 +123,6 @@ class Game {
 
     last_time = SDL_GetTicks64();
 
-    SDL_Rect src_rect = {x: 0, y: 0, w: 120, h: 120};
-    SDL_Rect dst_rect = {x: 0, y: 0, w: 120, h: 120};
     while(this.is_running) {
       while(SDL_PollEvent(&this.event)) {
 	if( this.event.type == SDL_QUIT) {
@@ -124,11 +142,27 @@ class Game {
       SDL_RenderClear(this.renderer);
 
       // texture 노출처리 
-      SDL_RenderCopy(this.renderer, 
-		     this.asset_manager.textures["mychar"],
-		     &src_rect,
-		     &dst_rect);
-		     
+      // animation 노출하기 
+      foreach(animation; this.asset_manager.animations) {
+	// 노출 atlas 의 좌표값
+	string atlas_name = animation.atlas_name;
+	
+	// 해당 텍스쳐
+	Atlas atlas = this.asset_manager.atlases[ atlas_name ];
+	SDL_Texture* texture = this.asset_manager.textures[ atlas.texture_name ];
+
+	// atlas의 현재 frame
+	int current_frame = animation.current_frame;
+	
+	// SDL_Rect 값
+	SDL_Rect src_rect = atlas.rects[current_frame];
+
+	SDL_Rect dst_rect = { x: 0, y: 0, w: 16, h: 16 };
+	// 그리기
+	SDL_RenderCopy( this.renderer, texture, 
+			&src_rect, &dst_rect);
+	
+      }
       
       SDL_RenderPresent(this.renderer);
     }

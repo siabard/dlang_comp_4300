@@ -1,1 +1,3 @@
-texture player assets/player.jpg 16 16
+# texture [textur name] [path] width height
+texture player assets/mychar.jpg 16 16
+animation player pleft 
