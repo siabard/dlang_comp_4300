@@ -7,5 +7,8 @@ scene scene_01 scene_01.txt
 # texture [texture name] [path]
 texture mychar ./assets/mychar.png
 
-# animation [animation name] [texture name] x y w h frames duration loop
-animation mychar_right mychar 0 0 16 16 3 400 Y 
+# atlas [atlas name] [texture name] [tile width] [tile height]
+atlas at_mychar mychar 16 16
+
+# animation [animation name] [atlas name] start_farme frames duration loop
+animation mychar_right at_mychar 0 3 400 Y 
