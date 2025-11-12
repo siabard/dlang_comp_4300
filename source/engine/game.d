@@ -88,9 +88,20 @@ class Game {
     }
   }
 
+  // 게임내에서는 각각의 시스템이 있다. (position, movement, animation 등)
+
+  void update(ulong dt) {
+
+  }
+
   void game_loop() {
     this.is_running = true;
 
+    ulong last_time;
+    ulong dt;
+    ulong current_time;
+
+    last_time = SDL_GetTicks64();
 
     SDL_Rect src_rect = {x: 0, y: 0, w: 120, h: 120};
     SDL_Rect dst_rect = {x: 0, y: 0, w: 120, h: 120};
@@ -100,7 +111,16 @@ class Game {
 	  this.is_running = false;
 	}
       }
+
+      // 지난 프레임 이 후 얼마나 시간이 지났는지 확인한다.
+      current_time = SDL_GetTicks64();
+      dt = current_time - last_time;
+      last_time = current_time;
+
       
+      // update 한다.
+      this.update(dt);
+
       SDL_RenderClear(this.renderer);
 
       // texture 노출처리 
