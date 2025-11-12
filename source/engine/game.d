@@ -110,7 +110,12 @@ class Game {
 
   // 게임내에서는 각각의 시스템이 있다. (position, movement, animation 등)
 
-  void update(ulong dt) {
+  void update(float dt) {
+    foreach(ref animation; this.asset_manager.animations) {
+      animation.update(dt);
+    }
+
+    
 
   }
 

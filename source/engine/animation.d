@@ -24,17 +24,19 @@ class Animation {
     this.is_loop = is_loop;
     this.is_alive = true;
     this.current_frame = start_frame;
+    this.elapsed_time = 0.0;
   }
 
   void update(float dt) {
+    import std.stdio;
+
     if( this.is_alive == true) {
       this.elapsed_time = this.elapsed_time + dt;
-
       if(this.elapsed_time >= this.duration) {
 	this.elapsed_time = 0;
 	this.current_frame = this.current_frame + 1;
 
-	if (this.current_frame > this.frame_length + this.start_frame) {
+	if (this.current_frame >= this.frame_length + this.start_frame) {
 	  this.current_frame = this.start_frame;
 
 	  if (this.is_loop == false) {
