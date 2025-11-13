@@ -16,6 +16,8 @@ import engine.component.position_component;
 import engine.component.movement_component;
 import engine.component.animation_component;
 
+import engine.input.keyboard;
+
 struct SceneSetting {
   string name;
   string path;
@@ -25,7 +27,7 @@ class Game {
   SDL_Window* window;
   SDL_Renderer* renderer;
   AssetManager asset_manager;
-
+  KeyboardHandler keyboard_handler;
 
   SDL_Event event;
   bool is_running;
@@ -38,6 +40,7 @@ class Game {
     this.renderer = renderer;
     this.asset_manager = new AssetManager;
     this.entity_manager = new EntityManager;
+    this.keyboard_handler = new KeyboardHandler;
   }
 
   ~this() {
@@ -179,9 +182,18 @@ class Game {
     last_time = SDL_GetTicks64();
 
     while(this.is_running) {
+      this.keyboard_handler.start_frame();
       while(SDL_PollEvent(&this.event)) {
 	if( this.event.type == SDL_QUIT) {
 	  this.is_running = false;
+	}
+
+	if( this.event.type == SDL_KEYDOWN) {
+	  this.keyboard_handler.on_press( event.key.keysym.scancode );
+	}
+
+	if( this.event.type == SDL_KEYUP) {
+	  this.keyboard_handler.on_release( event.key.keysym.scancode );
 	}
       }
 
