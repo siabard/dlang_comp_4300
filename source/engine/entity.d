@@ -10,12 +10,13 @@ class Entity {
   AnimationComponent* animation;
 
   int id;
-
+  string name;
 
   bool is_alive;
 
-  this(int id) {
+  this(int id, stirng name) {
     this.id = id;
+    this.name = name;
     this.is_alive = true;
   }
 
