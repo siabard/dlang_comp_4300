@@ -22,12 +22,14 @@ class EntityManager {
     }
   }
 
-  void new_entity() { 
+  Entity new_entity(string name) { 
     this.entity_id = this.entity_id + 1;
 
-    Entity new_entity = new Entity(this.entity_id);
+    Entity new_entity = new Entity(this.entity_id, name);
 
     added_entities ~= new_entity;  // cause reallocate
+
+    return new_entity;
   }
 
   void update() {
@@ -41,8 +43,10 @@ class EntityManager {
     this.entities = this.entities.filter!( entity => entity.is_alive).array;
     
     // append 
-    this.entities ~= this.added_entities;
+    if(this.added_entities.length > 0) {
 
+      this.entities ~= this.added_entities;
+    }
 
     // added_entities는 모두 비운다.
 

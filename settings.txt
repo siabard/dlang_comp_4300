@@ -13,13 +13,17 @@ atlas at_mychar mychar 16 16
 # animation [animation name] [atlas name] start_farme frames duration loop
 animation mychar_right at_mychar 0 3 400 Y 
 
-
 # entity [entity name]
+entity player
 
-# set-component [entity name] position [x] [y]
+# set-entity [entity name] position [x] [y]
+set-entity player position 120 120
 
-# set-component [entity name] animation [animation key] [animation name]
+# set-entity [entity name] animation [animation key] [animation name]
+set-entity player animation right mychar_right
 
-# set-component [entity name] movement [dx] [dy]
+# set-entity [entity name] movement [dx] [dy]
+set-entity player movement 0 0
 
-# set-component [entity name] collision [ox oy] [w] [h]
+
+# set-entity [entity name] collision [ox oy] [w] [h]
