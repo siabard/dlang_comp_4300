@@ -20,6 +20,8 @@ import engine.component.animation_component;
 import engine.input.keyboard;
 import engine.config;
 
+// system
+import engine.systems.animation_system;
 
 class Game {
   SDL_Window* window;
@@ -30,7 +32,7 @@ class Game {
   SDL_Event event;
   bool is_running;
 
-  SceneSetting[string] scene_settings;
+  Scene[] scenes;
   EntityManager entity_manager;
 
   this(SDL_Window* window, SDL_Renderer* renderer) {
@@ -54,18 +56,13 @@ class Game {
   }
 
   void load_setting(string filepath) {
-    open_config(this.renderer, this.entity_manager, this.asset_manager, scene_settings, filepath);
+    open_config(this.renderer, this.entity_manager, this.asset_manager, scenes, filepath);
   }
 
   // 게임내에서는 각각의 시스템이 있다. (position, movement, animation 등)
 
   void update(float dt) {
-    
-    foreach(entity; this.entity_manager.entities) {
-      if( entity.animation.current_animation != "") {
-	entity.animation.update(dt);
-      }
-    }
+    animation_system(this.entity_manager, dt);
 
     this.entity_manager.update();    
 

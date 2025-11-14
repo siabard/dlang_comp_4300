@@ -12,6 +12,7 @@ import engine.component.position_component;
 import engine.component.movement_component;
 import engine.component.animation_component;
 
+import engine.scene;
 
 import bindbc.sdl;
 import std.stdio;
@@ -19,7 +20,7 @@ import std.string;
 import std.conv;
 import std.algorithm;
 
-void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref SceneSetting[string] scene_settings, string filepath) {
+void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref Scene[] scenes, string filepath) {
     File file = File(filepath, "r");
     
     while(!file.eof()) {
@@ -49,8 +50,8 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
 	writeln(" Width :" , lineArray[1], " Height :", lineArray[2]);
       } else if(lineArray[0] == "scene") {
 	// scene 정보 등록 
-	SceneSetting ss = { name: lineArray[1], path: lineArray[2] };
-	scene_settings[ lineArray[1] ] = ss;
+	Scene scene = new Scene(lineArray[1], lineArray[2]);
+	scenes  ~= scene;
       } else  if(lineArray[0] == "texture") {
 	SDL_Texture* texture = IMG_LoadTexture(renderer, std.string.toStringz(lineArray[2]) );
 	am.textures[ lineArray[1] ] = texture;
@@ -116,8 +117,8 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
     file.close();
 
     // Scnene 정보 확인 
-    foreach (scene_setting; scene_settings.values ) {
-      writeln("name :", scene_setting.name , " path : ", scene_setting.path );
+    foreach (scene; scenes ) {
+      writeln("name :", scene.name , " path : ", scene.path );
     }
   
 
