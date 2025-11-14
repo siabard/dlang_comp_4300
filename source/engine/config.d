@@ -114,12 +114,5 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
 	}
       }
     }
-    file.close();
-
-    // Scnene 정보 확인 
-    foreach (scene; scenes ) {
-      writeln("name :", scene.name , " path : ", scene.path );
-    }
-  
-
+    file.close();  
 }

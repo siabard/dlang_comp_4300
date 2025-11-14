@@ -1,3 +1,13 @@
-# texture [textur name] [path] width height
-texture player assets/mychar.jpg 16 16
-animation player pleft 
+# entity [entity name]
+entity player
+
+# set-entity [entity name] position [x] [y]
+set-entity player position 120 120
+
+# set-entity [entity name] animation [animation key] [animation name]
+set-entity player animation right mychar_right
+
+# set-entity [entity name] movement [dx] [dy]
+set-entity player movement 0 0
+
+# set-entity [entity name] collision [ox oy] [w] [h]

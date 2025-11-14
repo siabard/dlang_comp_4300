@@ -20,9 +20,6 @@ import engine.component.animation_component;
 import engine.input.keyboard;
 import engine.config;
 
-// system
-import engine.systems.animation_system;
-import engine.systems.render_system;
 
 class Game {
   SDL_Window* window;
@@ -57,14 +54,21 @@ class Game {
   }
 
   void load_setting(string filepath) {
-    open_config(this.renderer, this.entity_manager, this.asset_manager, scenes, filepath);
+    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, filepath);
+    
+    foreach(scene; this.scenes) {
+      scene.game = this;
+    }
+    // 가장 위에 있는 scene을 초기화한다.
+    this.scenes[$ - 1].load_setting();
   }
 
   // 게임내에서는 각각의 시스템이 있다. (position, movement, animation 등)
 
   void update(float dt) {
-    animation_system(this.entity_manager, dt);
-
+    // 가장 최상단의 scene을 update 함.
+    this.scenes[$ - 1].update(dt);
+    
     this.entity_manager.update();    
 
   }
@@ -104,9 +108,8 @@ class Game {
       this.update(dt);
 
       SDL_RenderClear(this.renderer);
-
-      // entity 노출하기
-      render_system(this.renderer, this.entity_manager, this.asset_manager);
+      
+      this.scenes[$ - 1].render();
       
       SDL_RenderPresent(this.renderer);
     }
