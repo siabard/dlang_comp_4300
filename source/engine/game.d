@@ -22,6 +22,7 @@ import engine.config;
 
 // system
 import engine.systems.animation_system;
+import engine.systems.render_system;
 
 class Game {
   SDL_Window* window;
@@ -105,31 +106,7 @@ class Game {
       SDL_RenderClear(this.renderer);
 
       // entity 노출하기
-      foreach(entity; this.entity_manager.entities) {
-	if(entity.animation !is null && entity.animation.current_animation != "" && entity.position !is null) {
-	  Animation animation = entity.animation.animations[ entity.animation.current_animation ];
-
-	  // 노출 atlas 의 좌표값
-	  string atlas_name = animation.atlas_name;
-	
-	  // 해당 텍스쳐
-	  Atlas atlas = this.asset_manager.atlases[ atlas_name ];
-	  SDL_Texture* texture = this.asset_manager.textures[ atlas.texture_name ];
-
-	  // atlas의 현재 frame
-	  int current_frame = entity.animation.get_animation_frame();
-	  
-	  // SDL_Rect 값
-	  SDL_Rect src_rect = atlas.rects[current_frame];
-	  
-	  SDL_Rect dst_rect = { x: to!int(entity.position.x), y: to!int(entity.position.y), w: 16, h: 16 };
-	  // 그리기
-	  SDL_RenderCopy( this.renderer, texture, 
-			  &src_rect, &dst_rect);
-	  
-	}
-      }
-
+      render_system(this.renderer, this.entity_manager, this.asset_manager);
       
       SDL_RenderPresent(this.renderer);
     }
