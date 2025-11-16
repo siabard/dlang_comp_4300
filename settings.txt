@@ -13,3 +13,4 @@ atlas at_mychar mychar 16 16
 # animation [animation name] [atlas name] start_farme frames duration loop
 animation mychar_right at_mychar 0 3 400 Y 
 
+texture korfont ./assets/hangul.png

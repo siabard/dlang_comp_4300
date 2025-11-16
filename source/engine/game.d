@@ -74,6 +74,27 @@ class Game {
   }
 
   void game_loop() {
+    import engine.pixels;
+
+    // 임시 Surface 생성 
+    SDL_Surface* surface = IMG_Load("./assets/hangul.png");
+    SDL_Texture* texture;
+
+    if(surface != null) {
+      writeln("Loading hangul asset");
+    }
+    for(int x = 0; x < 50; x++) {
+      for(int y = 0; y < 50; y++) {
+	set_pixel(surface, x, y, 0xccffccff);
+      }
+    }
+
+
+    texture = SDL_CreateTextureFromSurface(this.renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_Rect src_rect = {x: 0, y: 0, w: 50, h: 50};
+    SDL_Rect dst_rect = {x: 120, y: 120, w: 50, h: 50};
+
     this.is_running = true;
 
     ulong last_time;
@@ -110,9 +131,16 @@ class Game {
       SDL_RenderClear(this.renderer);
       
       this.scenes[$ - 1].render();
+
+      SDL_RenderCopy(this.renderer, 
+		     texture,
+		     &src_rect,
+		     &dst_rect);
       
       SDL_RenderPresent(this.renderer);
     }
+
+    SDL_DestroyTexture(texture);
   }
 
 }
