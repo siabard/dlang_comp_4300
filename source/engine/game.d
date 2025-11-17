@@ -78,11 +78,14 @@ class Game {
   void game_loop() {
     import engine.pixels;
 
+    /* 임시 Surface 관련 내역은 더 이상 사용하지않을테니 모두 주석 처리 함 
     // 임시 Surface 생성 
     SDL_Surface* surface = IMG_Load("./assets/hangul.png");
 
     // PNG 압축률이 너무 좋아서 굳이 fnt 파일은 안만들어도 됨
-    //surface_to_fnt(surface, "./assets/hangul.fnt", 16, 16);
+    // 혹시 D 소스로 fnt 바이너리를 16진 덤프해서 쓰겠다면
+    // 해당 함수를 활용해서 고민해보는 것도 좋긴 할 것 같음
+    // surface_to_fnt(surface, "./assets/hangul.fnt", 16, 16);
 
     SDL_Texture* texture;
 
@@ -100,6 +103,15 @@ class Game {
     SDL_FreeSurface(surface);
     SDL_Rect src_rect = {x: 0, y: 0, w: 50, h: 50};
     SDL_Rect dst_rect = {x: 120, y: 120, w: 50, h: 50};
+
+    // Surface 노출처리
+    SDL_RenderCopy(this.renderer, 
+     texture,
+     &src_rect,
+     &dst_rect);
+      
+    SDL_DestroyTexture(texture);
+    */
 
     this.is_running = true;
 
@@ -136,6 +148,7 @@ class Game {
 
       SDL_RenderClear(this.renderer);
       
+      // 가장 최상단 scene 만 렌더링한다.
       this.scenes[$ - 1].render();
 
       // Text 노출처리 
@@ -144,16 +157,10 @@ class Game {
       draw_text(this.renderer, this.asset_manager.fonts, 90, 126, 120, "아름다운 강산에 금수강산에. 단군 할아버지 터잡으시고.");
 
 
-      // Surface 노출처리
-      SDL_RenderCopy(this.renderer, 
-		     texture,
-		     &src_rect,
-		     &dst_rect);
-      
       SDL_RenderPresent(this.renderer);
     }
 
-    SDL_DestroyTexture(texture);
+
   }
 
 }
