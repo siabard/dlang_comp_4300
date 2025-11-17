@@ -55,6 +55,9 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
       } else  if(lineArray[0] == "texture") {
 	SDL_Texture* texture = IMG_LoadTexture(renderer, std.string.toStringz(lineArray[2]) );
 	am.textures[ lineArray[1] ] = texture;
+      } else  if(lineArray[0] == "font") {
+	SDL_Texture* texture = IMG_LoadTexture(renderer, std.string.toStringz(lineArray[2]) );
+	am.fonts[ lineArray[1] ] = texture;
       } else if( lineArray[0] == "atlas") {
 	SDL_Texture* texture = am.textures[ lineArray[2] ];
 	if(texture != null) {

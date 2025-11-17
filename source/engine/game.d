@@ -20,6 +20,8 @@ import engine.component.animation_component;
 import engine.input.keyboard;
 import engine.config;
 
+import engine.drawtext;
+
 
 class Game {
   SDL_Window* window;
@@ -132,6 +134,13 @@ class Game {
       
       this.scenes[$ - 1].render();
 
+      // Text 노출처리 
+      draw_text(this.renderer, this.asset_manager.fonts, 90, 90, 120, "ABCDEFGHIJKLMN");
+      // Text 노출처리 
+      draw_text(this.renderer, this.asset_manager.fonts, 90, 126, 120, "아름다운 강산에 금수강산에. 단군 할아버지 터잡으시고.");
+
+
+      // Surface 노출처리
       SDL_RenderCopy(this.renderer, 
 		     texture,
 		     &src_rect,

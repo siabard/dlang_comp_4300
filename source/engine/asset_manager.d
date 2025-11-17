@@ -16,6 +16,9 @@ class AssetManager {
   // Animation
   Animation[string] animations;
 
+  // font texture
+  SDL_Texture*[string] fonts;
+
   this() {
   }
 
@@ -38,5 +41,11 @@ class AssetManager {
       }
     }
 
+    // remove all font textures
+    foreach(texture; this.fonts.byValue) {
+      if(texture != null) {
+	SDL_DestroyTexture(texture);
+      }
+    }
   }
 }
