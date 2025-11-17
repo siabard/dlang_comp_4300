@@ -10,3 +10,12 @@ void set_pixel(SDL_Surface *surface, int x, int y, uint pixel)
 				    + x * surface.format.BytesPerPixel);
   *target_pixel = pixel;
 }
+
+uint get_pixel(SDL_Surface *surface, int x, int y) 
+{
+  uint *target_pixel = cast(uint*) (cast(ubyte*) surface.pixels
+				    + y * surface.pitch
+				    + x * surface.format.BytesPerPixel);
+
+  return *target_pixel;
+}
