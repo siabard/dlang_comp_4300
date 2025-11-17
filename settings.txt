@@ -11,7 +11,7 @@ texture mychar ./assets/mychar.png
 atlas at_mychar mychar 16 16
 
 # animation [animation name] [atlas name] start_farme frames duration loop
-animation mychar_right at_mychar 0 3 400 Y 
+animation mychar_right at_mychar 0 3 300 Y 
 
 # font [font name] [path]
 font korfont ./assets/hangul.png

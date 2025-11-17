@@ -2,7 +2,7 @@
 entity player
 
 # set-entity [entity name] position [x] [y]
-set-entity player position 120 120
+set-entity player position 0 0
 
 # set-entity [entity name] animation [animation key] [animation name]
 set-entity player animation right mychar_right
