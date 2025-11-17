@@ -21,7 +21,7 @@ import engine.input.keyboard;
 import engine.config;
 
 import engine.drawtext;
-
+import engine.bitmap_font;
 
 class Game {
   SDL_Window* window;
@@ -80,6 +80,10 @@ class Game {
 
     // 임시 Surface 생성 
     SDL_Surface* surface = IMG_Load("./assets/hangul.png");
+
+    // PNG 압축률이 너무 좋아서 굳이 fnt 파일은 안만들어도 됨
+    //surface_to_fnt(surface, "./assets/hangul.fnt", 16, 16);
+
     SDL_Texture* texture;
 
     if(surface != null) {
