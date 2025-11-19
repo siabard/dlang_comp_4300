@@ -16,3 +16,5 @@ animation mychar_right at_mychar 0 3 300 Y
 # font [font name] [path]
 font korfont ./assets/hangul.png
 font asciifont ./assets/ascii-plain.png
+
+texture panel ./assets/panel.png

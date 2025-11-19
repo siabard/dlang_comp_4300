@@ -23,6 +23,8 @@ import engine.config;
 import engine.drawtext;
 import engine.bitmap_font;
 
+import engine.gui.panel;
+
 class Game {
   SDL_Window* window;
   SDL_Renderer* renderer;
@@ -101,6 +103,10 @@ class Game {
     SDL_Rect src_rect = {x: 0, y: 0, w: 50, h: 50};
     SDL_Rect dst_rect = {x: 120, y: 120, w: 50, h: 50};
 
+
+    // Panel
+    Panel panel = new Panel(this.asset_manager.textures["panel"], 280, 30, 150, 150);
+
     this.is_running = true;
 
     ulong last_time;
@@ -137,6 +143,8 @@ class Game {
       SDL_RenderClear(this.renderer);
       
       this.scenes[$ - 1].render();
+
+      panel.render(this.renderer);
 
       // Text 노출처리 
       draw_text(this.renderer, this.asset_manager.fonts, 90, 90, 120, "ABCDEFGHIJKLMN");
