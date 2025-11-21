@@ -11,6 +11,7 @@ import engine.entity;
 import engine.component.position_component;
 import engine.component.movement_component;
 import engine.component.animation_component;
+import engine.tile;
 
 import engine.scene;
 
@@ -20,7 +21,7 @@ import std.string;
 import std.conv;
 import std.algorithm;
 
-void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref Scene[] scenes, string filepath) {
+void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref Scene[] scenes, ref Tile[string] tiles, string filepath) {
     File file = File(filepath, "r");
     
     while(!file.eof()) {
@@ -115,6 +116,10 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
 
 	  }
 	}
+      } else if (lineArray[0] == "map") {
+	Tile newTile = new Tile( lineArray[1], am, renderer);
+	newTile.load_map( lineArray[2] );
+	tiles[ lineArray[1] ] = newTile;
       }
     }
     file.close();  

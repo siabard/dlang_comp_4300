@@ -18,7 +18,7 @@ class Scene {
   }
 
   void load_setting() {
-    open_config(game.renderer, game.entity_manager, game.asset_manager, game.scenes, this.path);
+    open_config(game.renderer, game.entity_manager, game.asset_manager, game.scenes, game.tiles, this.path);
   }
 
   void update(float dt) {

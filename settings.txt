@@ -18,3 +18,7 @@ font korfont ./assets/hangul.png
 font asciifont ./assets/ascii-plain.png
 
 texture panel ./assets/panel.png
+
+
+# map [mapname] path
+map section_1 ./assets/tiled.json

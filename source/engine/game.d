@@ -22,6 +22,7 @@ import engine.config;
 
 import engine.drawtext;
 import engine.bitmap_font;
+import engine.tile;
 
 import engine.gui.panel;
 
@@ -35,6 +36,8 @@ class Game {
   bool is_running;
 
   Scene[] scenes;
+  Tile[string] tiles;
+
   EntityManager entity_manager;
 
   this(SDL_Window* window, SDL_Renderer* renderer) {
@@ -58,7 +61,7 @@ class Game {
   }
 
   void load_setting(string filepath) {
-    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, filepath);
+    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, this.tiles, filepath);
     
     foreach(scene; this.scenes) {
       scene.game = this;

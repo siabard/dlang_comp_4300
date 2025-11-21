@@ -4,7 +4,11 @@
     ],
     "copyright": "Copyright © 2025, Yeonho Jang",
     "dependencies": {
-	"bindbc-sdl": "~>1.5"
+	"bindbc-sdl": "~>1.5",
+	"jsonizer": "~>0.7.7",
+	"dtiled": {
+	    "path": "../dtiled" 
+	}
     },
     "versions": [
 	"SDL_2_30", "SDL_Image_2_6"
