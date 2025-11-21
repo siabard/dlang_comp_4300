@@ -11,10 +11,13 @@ import engine.animation;
 import engine.animation;
 import engine.atlas;
 import engine.asset_manager;
+import engine.camera;
 
+import engine.physics;
 /// 주어진 entity 를 노출함
+/// entity 는 camera 에 종속됨 
 
-void render_system(SDL_Renderer* renderer, EntityManager em, AssetManager am) {
+void render_system(SDL_Renderer* renderer, EntityManager em, AssetManager am, Camera camera) {
   
   // entity 노출하기
   foreach(entity; em.entities) {
@@ -32,9 +35,15 @@ void render_system(SDL_Renderer* renderer, EntityManager em, AssetManager am) {
       int current_frame = entity.animation.get_animation_frame();
 	  
       // SDL_Rect 값
-      SDL_Rect src_rect = atlas.rects[current_frame];
-	  
+      SDL_Rect src_rect = atlas.rects[current_frame];  
       SDL_Rect dst_rect = { x: to!int(entity.position.x), y: to!int(entity.position.y), w: 16, h: 16 };
+
+
+      // 해당 dst_rect가 camera 에 노출가능한지 먼저 평가한다.
+      if(aabb_camera( dst_rect, camera)) {
+	relative_tgt_rect(src_rect, dst_rect, camera);
+      }
+
       // 그리기
       SDL_RenderCopy( renderer, texture, 
 		      &src_rect, &dst_rect);

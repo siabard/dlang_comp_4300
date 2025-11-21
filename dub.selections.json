@@ -3,6 +3,8 @@
 	"versions": {
 		"bindbc-common": "1.0.5",
 		"bindbc-loader": "1.1.5",
-		"bindbc-sdl": "1.5.2"
+		"bindbc-sdl": "1.5.2",
+		"dtiled": {"path":"../dtiled"},
+		"jsonizer": "0.7.7"
 	}
 }

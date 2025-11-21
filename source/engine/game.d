@@ -22,6 +22,9 @@ import engine.config;
 
 import engine.drawtext;
 import engine.bitmap_font;
+import engine.tile;
+
+import engine.gui.panel;
 
 class Game {
   SDL_Window* window;
@@ -33,6 +36,8 @@ class Game {
   bool is_running;
 
   Scene[] scenes;
+  Tile[string] tiles;
+
   EntityManager entity_manager;
 
   this(SDL_Window* window, SDL_Renderer* renderer) {
@@ -56,7 +61,7 @@ class Game {
   }
 
   void load_setting(string filepath) {
-    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, filepath);
+    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, this.tiles, filepath);
     
     foreach(scene; this.scenes) {
       scene.game = this;
@@ -113,6 +118,9 @@ class Game {
     SDL_DestroyTexture(texture);
     */
 
+    // Panel
+    Panel panel = new Panel(this.asset_manager.textures["panel"], 280, 30, 150, 150);
+
     this.is_running = true;
 
     ulong last_time;
@@ -150,6 +158,8 @@ class Game {
       
       // 가장 최상단 scene 만 렌더링한다.
       this.scenes[$ - 1].render();
+
+      panel.render(this.renderer);
 
       // Text 노출처리 
       draw_text(this.renderer, this.asset_manager.fonts, 90, 90, 120, "ABCDEFGHIJKLMN");
