@@ -7,14 +7,20 @@ import engine.config;
 import engine.systems.animation_system;
 import engine.systems.render_system;
 
+import engine.camera;
+
 class Scene {
   string name;
   string path;
   Game game;
+  Camera camera;
 
   this(string name, string path) {
     this.name = name;
     this.path = path;
+
+    Camera newCamera  = {x: 5, y: 5, width: 400, height: 400};
+    this.camera = newCamera;
   }
 
   void load_setting() {
@@ -28,7 +34,7 @@ class Scene {
   void render() {
     
     // entity 노출하기
-    render_system(game.renderer, game.entity_manager, game.asset_manager);
+    render_system(game.renderer, game.entity_manager, game.asset_manager, this.camera);
       
   }
 }
