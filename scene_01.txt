@@ -11,3 +11,17 @@ set-entity player animation right mychar_right
 set-entity player movement 0 0
 
 # set-entity [entity name] collision [ox oy] [w] [h]
+
+
+# set-entity [entity name] action [action name] [arg0] [arg1] [arg2] ...
+
+# trigger type : on-enter / on-exit
+# x, y 위치에 trigger type 를 설정 함 
+# set-trigger [trigger type] [trigger name]  [x] [y] [entity name]
+
+# player 라는 entity에 적용할 on-enter 형 telpor-1 트리거를
+# 20 30 에 설정한다
+# on-enter type은 collision component 가 있을 때 제대로 동작한다.
+# set-trigger on-enter telpor-1 20 30 player
+
+# set-entity [entity name] trigger [trigger name]

@@ -26,27 +26,16 @@ class Tile {
   void load_tileset(TilesetData[] tileSetData, string dir_name) {
     import std.stdio;
 
-    foreach(datum; tileSetData) {
-      writeln("datum => ", datum);
-
-      // TilesetData 에서는 source 로 tileset path 를 찾을 수 있다.
-      auto tileset = datum;
-      if(datum.source != "") {
-	// source 가 있는 경우는 해당 파일을 읽어서 Texture 와 atlas 를 등록할 수 있어야함.
-	tileset = readJSON!TilesetData(buildPath(dir_name, datum.source));
-      } 
-
-      
-      writeln(" tile texture => ", datum.image);
-
+    foreach(tileset; tileSetData) {
+      writeln("tileset =>", tileset);
       string tilename = "tile_" ~ tileset.name;
       // Texture 로 삼을 파일의 경로 + 이름
-      SDL_Texture* texture = IMG_LoadTexture(this.renderer, std.string.toStringz(buildPath(dir_name, datum.image)));
+      SDL_Texture* texture = IMG_LoadTexture(this.renderer, std.string.toStringz(buildPath(dir_name, tileset.image)));
       this.am.textures[ tilename ] = texture;
       
       // Texutre를 atlas로 변환하기 위한 티일 크기와 atlas 이름 
-      int width = datum.tileWidth;
-      int height = datum.tileHeight;
+      int width = tileset.tileWidth;
+      int height = tileset.tileHeight;
       
       Atlas atlas = new Atlas( tilename, tilename, width, height, texture);
       this.am.atlases[ tilename ] = atlas;
