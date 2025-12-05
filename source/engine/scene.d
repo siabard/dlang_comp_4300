@@ -5,6 +5,7 @@ import engine.config;
 
 // system
 import engine.systems.animation_system;
+import engine.systems.action_system;
 import engine.systems.render_system;
 
 import engine.camera;
@@ -24,10 +25,18 @@ class Scene {
   }
 
   void load_setting() {
-    open_config(game.renderer, game.entity_manager, game.asset_manager, game.scenes, game.tiles, this.path);
+    open_config(
+		game.renderer, 
+		game.entity_manager, 
+		game.asset_manager, 
+		game.action_manager, 
+		game.scenes, 
+		game.tiles, 
+		this.path);
   }
 
   void update(float dt) {
+    action_system(game.entity_manager);
     animation_system(game.entity_manager, dt);
   }
 

@@ -11,7 +11,10 @@ import engine.entity;
 import engine.component.position_component;
 import engine.component.movement_component;
 import engine.component.animation_component;
+import engine.component.action_component;
+
 import engine.tile;
+import engine.action_manager;
 
 import engine.scene;
 
@@ -21,7 +24,13 @@ import std.string;
 import std.conv;
 import std.algorithm;
 
-void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref Scene[] scenes, ref Tile[string] tiles, string filepath) {
+void open_config(SDL_Renderer* renderer, 
+		 EntityManager em, 
+		 AssetManager am, 
+		 ActionManager actm,
+		 ref Scene[] scenes,
+		 ref Tile[string] tiles, 
+		 string filepath) {
     File file = File(filepath, "r");
     
     while(!file.eof()) {
@@ -114,12 +123,29 @@ void open_config(SDL_Renderer* renderer, EntityManager em, AssetManager am, ref 
 	    target.animation.current_animation = lineArray[3];	    
 	    target.animation.animations[ lineArray[3] ] = anim;
 
+	  } else if (component_name == "action") {
+	    Action action = actm.actions[ lineArray[3] ];
+	    if(target.action is null) {
+	      target.action = new ActionComponent();
+	    }
+
+	    target.action.actions ~= action;
 	  }
+
 	}
       } else if (lineArray[0] == "map") {
 	Tile newTile = new Tile( lineArray[1], am, renderer);
 	newTile.load_map( lineArray[2] );
 	tiles[ lineArray[1] ] = newTile;
+      } else if (lineArray[0] == "action") {
+	Action action = { action_type: cast(ActionType) lineArray[2],
+	  args: [ lineArray[3], lineArray[4] ], 
+	  is_active: true,
+	  name: lineArray[1] 
+	};
+	
+	actm.actions[ lineArray[1] ] = action;
+	
       }
     }
     file.close();  

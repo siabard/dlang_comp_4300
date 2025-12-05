@@ -12,6 +12,7 @@ import engine.animation;
 import engine.entity;
 import engine.entity_manager;
 import engine.scene;
+import engine.action_manager;
 
 import engine.component.position_component;
 import engine.component.movement_component;
@@ -30,6 +31,7 @@ class Game {
   SDL_Window* window;
   SDL_Renderer* renderer;
   AssetManager asset_manager;
+  ActionManager action_manager;
   KeyboardHandler keyboard_handler;
 
   SDL_Event event;
@@ -46,6 +48,7 @@ class Game {
     this.asset_manager = new AssetManager;
     this.entity_manager = new EntityManager;
     this.keyboard_handler = new KeyboardHandler;
+    this.action_manager = new ActionManager;
   }
 
   ~this() {
@@ -61,13 +64,38 @@ class Game {
   }
 
   void load_setting(string filepath) {
-    open_config(this.renderer, this.entity_manager, this.asset_manager, this.scenes, this.tiles, filepath);
+    open_config(
+		this.renderer, 
+		this.entity_manager, 
+		this.asset_manager, 
+		this.action_manager, 
+		this.scenes, 
+		this.tiles, 
+		filepath);
     
     foreach(scene; this.scenes) {
       scene.game = this;
     }
     // 가장 위에 있는 scene을 초기화한다.
     this.scenes[$ - 1].load_setting();
+
+    // 디버깅 용..
+    /*
+    auto actm = this.action_manager;
+
+    foreach(action; actm.actions) {
+      write(" ACTION NAME => ", action.name);
+      write(" :: ");
+      foreach(arg; action.args) {
+	write(" arg: ", arg );
+	write(" ");
+      }
+      writeln();
+    }
+    */
+
+    // 디버깅 영역 끝 .. 
+
   }
 
   // 게임내에서는 각각의 시스템이 있다. (position, movement, animation 등)

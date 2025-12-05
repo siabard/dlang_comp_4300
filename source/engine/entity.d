@@ -4,10 +4,12 @@ class Entity {
   import engine.component.animation_component;
   import engine.component.position_component;
   import engine.component.movement_component;
+  import engine.component.action_component;
 
   MovementComponent movement;
   PositionComponent position;
   AnimationComponent animation;
+  ActionComponent action;
 
   int id;
   string name;
