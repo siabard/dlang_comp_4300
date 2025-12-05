@@ -30,6 +30,7 @@ class Scene {
 		game.entity_manager, 
 		game.asset_manager, 
 		game.action_manager, 
+		game.trigger_manager,
 		game.scenes, 
 		game.tiles, 
 		this.path);

@@ -1,4 +1,4 @@
-# action type : teleport 
+# action type : teleport
 #   teleport x y : x , y 위치로 entity를 옮김 (필수조건 : position component)
 # action name [action type] x y
 
@@ -6,17 +6,19 @@ action act_telpo_10_11 teleport 120 110
 
 
 # trigger type : on-enter / on-exit
-# x, y 위치에 trigger type 를 설정 함 
-# trigger [trigger name] [trigger type] [action name]  [x] [y]
+# x, y 위치에 trigger type 를 설정 함
+# trigger [trigger name] [trigger type] [action name]
 
-trigger trg_telpo on-enter telpo_10_11 2 2 
+trigger trg_telpo on-enter telpo_10_11
 
 
 # entity [entity name]
 entity player
+entity warp_1
 
 # set-entity [entity name] position [x] [y]
 set-entity player position 0 0
+set-entity warp_1 position 80 80
 
 # set-entity [entity name] animation [animation key] [animation name]
 set-entity player animation right mychar_right
@@ -24,13 +26,17 @@ set-entity player animation right mychar_right
 # set-entity [entity name] movement [dx] [dy]
 set-entity player movement 0 0
 
-# set-entity [entity name] collision [ox oy] [w] [h]
+# set-entity [entity name] collision [collide type] [ox] [oy] [w] [h]
+set-entity warp_1 collision trigger 0 0 16 16
+
+set-entity player collision block 0 0 16 16
+
 
 
 # set-entity [entity name] action [action name]
 # 아래는 데모용 action 임
 # player 는 해당 action 을 실행하면 다른 곳으로 이동할 것임
-# set-entity player action act_telpo_10_11 
+# set-entity player action act_telpo_10_11
 
 
 # entity에 적용할 on-enter 형 telpor-1 트리거를
@@ -40,4 +46,4 @@ set-entity player movement 0 0
 
 # set-entity [entity name] trigger [trigger name]
 
-set-entity player trigger trg_telpo
+set-entity warp_1 trigger trg_telpo

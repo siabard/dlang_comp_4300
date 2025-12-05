@@ -5,11 +5,15 @@ class Entity {
   import engine.component.position_component;
   import engine.component.movement_component;
   import engine.component.action_component;
+  import engine.component.collision_component;
+  import engine.component.trigger_component;
 
   MovementComponent movement;
   PositionComponent position;
   AnimationComponent animation;
   ActionComponent action;
+  CollisionComponent collision;
+  TriggerComponent trigger;
 
   int id;
   string name;

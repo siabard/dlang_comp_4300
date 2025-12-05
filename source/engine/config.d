@@ -11,10 +11,13 @@ import engine.entity;
 import engine.component.position_component;
 import engine.component.movement_component;
 import engine.component.animation_component;
+import engine.component.collision_component;
 import engine.component.action_component;
+import engine.component.trigger_component;
 
 import engine.tile;
 import engine.action_manager;
+import engine.trigger_manager;
 
 import engine.scene;
 
@@ -28,6 +31,7 @@ void open_config(SDL_Renderer* renderer,
 		 EntityManager em, 
 		 AssetManager am, 
 		 ActionManager actm,
+		 TriggerManager tm,
 		 ref Scene[] scenes,
 		 ref Tile[string] tiles, 
 		 string filepath) {
@@ -130,6 +134,22 @@ void open_config(SDL_Renderer* renderer,
 	    }
 
 	    target.action.actions ~= action;
+	  } else if (component_name == "collision") {
+	    
+	    int ox = parse!int( lineArray[4] );
+	    int oy = parse!int( lineArray[5] );
+	    int w  = parse!int( lineArray[6] );
+	    int h  = parse!int( lineArray[7] );
+
+	    CollisionComponent collision = new CollisionComponent(ox, oy, w, h);
+	    collision.collide_type = cast(CollideType) lineArray[3];
+	    target.collision = collision;
+	  } else if (component_name == "trigger") {
+	    if(target.trigger is null) {
+	      target.trigger = new TriggerComponent();
+	    }
+	    Trigger trigger = tm.triggers[ lineArray[3] ];
+	    target.trigger.triggers ~= trigger;
 	  }
 
 	}
@@ -146,6 +166,10 @@ void open_config(SDL_Renderer* renderer,
 	
 	actm.actions[ lineArray[1] ] = action;
 	
+      } else if(lineArray[0] == "trigger") {
+	auto trigger_type = cast(TriggerType) lineArray[2];
+	Trigger trigger = new Trigger(trigger_type, lineArray[1], lineArray[3]);
+	tm.triggers[ lineArray[1] ] = trigger;
       }
     }
     file.close();  

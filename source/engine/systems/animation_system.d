@@ -7,8 +7,10 @@ import engine.animation;
 void animation_system(EntityManager em, float dt) {
   
   foreach(entity; em.entities) {
-    if( entity.animation.current_animation != "") {
-      entity.animation.update(dt);
+    if(entity.animation !is null) {
+      if( entity.animation.current_animation != "") {
+	entity.animation.update(dt);
+      }
     }
   }
 }

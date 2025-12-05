@@ -13,6 +13,7 @@ import engine.entity;
 import engine.entity_manager;
 import engine.scene;
 import engine.action_manager;
+import engine.trigger_manager;
 
 import engine.component.position_component;
 import engine.component.movement_component;
@@ -33,6 +34,7 @@ class Game {
   AssetManager asset_manager;
   ActionManager action_manager;
   KeyboardHandler keyboard_handler;
+  TriggerManager trigger_manager;
 
   SDL_Event event;
   bool is_running;
@@ -49,6 +51,7 @@ class Game {
     this.entity_manager = new EntityManager;
     this.keyboard_handler = new KeyboardHandler;
     this.action_manager = new ActionManager;
+    this.trigger_manager = new TriggerManager;
   }
 
   ~this() {
@@ -69,6 +72,7 @@ class Game {
 		this.entity_manager, 
 		this.asset_manager, 
 		this.action_manager, 
+		this.trigger_manager,
 		this.scenes, 
 		this.tiles, 
 		filepath);
