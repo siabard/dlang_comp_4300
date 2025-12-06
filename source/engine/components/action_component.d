@@ -1,4 +1,4 @@
-module engine.component.action_component;
+module engine.components.action_component;
 
 import engine.action_manager;
 

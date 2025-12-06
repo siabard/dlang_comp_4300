@@ -14,10 +14,11 @@ import engine.entity_manager;
 import engine.scene;
 import engine.action_manager;
 import engine.trigger_manager;
+import engine.input_manager;
 
-import engine.component.position_component;
-import engine.component.movement_component;
-import engine.component.animation_component;
+import engine.components.position_component;
+import engine.components.movement_component;
+import engine.components.animation_component;
 
 import engine.input.keyboard;
 import engine.config;
@@ -35,6 +36,7 @@ class Game {
   ActionManager action_manager;
   KeyboardHandler keyboard_handler;
   TriggerManager trigger_manager;
+  InputManager input_manager;
 
   SDL_Event event;
   bool is_running;
@@ -52,6 +54,7 @@ class Game {
     this.keyboard_handler = new KeyboardHandler;
     this.action_manager = new ActionManager;
     this.trigger_manager = new TriggerManager;
+    this.input_manager = new InputManager;
   }
 
   ~this() {
@@ -73,6 +76,7 @@ class Game {
 		this.asset_manager, 
 		this.action_manager, 
 		this.trigger_manager,
+		this.input_manager,
 		this.scenes, 
 		this.tiles, 
 		filepath);
@@ -181,7 +185,6 @@ class Game {
       current_time = SDL_GetTicks64();
       dt = current_time - last_time;
       last_time = current_time;
-
       
       // update 한다.
       this.update(dt);
@@ -198,11 +201,7 @@ class Game {
       // Text 노출처리 
       draw_text(this.renderer, this.asset_manager.fonts, 90, 126, 120, "아름다운 강산에 금수강산에. 단군 할아버지 터잡으시고.");
 
-
       SDL_RenderPresent(this.renderer);
     }
-
-
   }
-
 }

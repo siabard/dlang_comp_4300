@@ -21,3 +21,24 @@ texture panel ./assets/panel.png
 
 # map [mapname] path
 map section_1 ./assets/tiled.json
+
+
+
+# 키 입력 설정
+# keycode  [input action] [value]
+# SDL_SCANCODE_W 26
+# SDL_SCANCODE A 4
+# SDL_SCANCODE S 22
+# SDL_SCANCODE D 7
+# SDL_SCANCODE_RIGHT = 79,
+#    SDL_SCANCODE_LEFT = 80,
+#    SDL_SCANCODE_DOWN = 81,
+#    SDL_SCANCODE_UP = 82,
+keycode move-up    26
+keycode move-up    82
+keycode move-left  4
+keycode move-left  80
+keycode move-down  22
+keycode move-down  81
+keycode move-right 7
+keycode move-right 79

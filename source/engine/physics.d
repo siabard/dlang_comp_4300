@@ -1,7 +1,7 @@
 module engine.physics;
 
-import engine.component.collision_component;
-import engine.component.position_component;
+import engine.components.collision_component;
+import engine.components.position_component;
 
 import bindbc.sdl;
 

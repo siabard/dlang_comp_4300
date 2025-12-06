@@ -1,4 +1,4 @@
-module engine.component.animation_component;
+module engine.components.animation_component;
 
 class AnimationComponent {
 

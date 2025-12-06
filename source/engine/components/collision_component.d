@@ -1,4 +1,4 @@
-module engine.component.collision_component;
+module engine.components.collision_component;
 
 
 enum CollideType: string {

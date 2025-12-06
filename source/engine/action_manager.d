@@ -1,7 +1,7 @@
 module engine.action_manager;
 
 import engine.entity;
-import engine.component.position_component;
+import engine.components.position_component;
 
 enum ActionType : string {
   TELEPORT = "teleport"

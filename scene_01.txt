@@ -31,7 +31,12 @@ set-entity warp_1 collision trigger 0 0 16 16
 
 set-entity player collision block 0 0 16 16
 
-
+# 반응할 키 액션을 미리 설정함
+# set-entity [entity name] keyaction [key action]
+set-entity player keyaction move-up
+set-entity player keyaction move-down
+set-entity player keyaction move-left
+set-entity player keyaction move-right
 
 # set-entity [entity name] action [action name]
 # 아래는 데모용 action 임

@@ -1,4 +1,4 @@
-module engine.component.movement_component;
+module engine.components.movement_component;
 
 class MovementComponent {
   float dx;

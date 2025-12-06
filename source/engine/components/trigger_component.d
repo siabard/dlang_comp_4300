@@ -1,4 +1,4 @@
-module engine.component.trigger_component;
+module engine.components.trigger_component;
 
 import engine.trigger_manager;
 

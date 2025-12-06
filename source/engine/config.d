@@ -3,21 +3,23 @@ module engine.config;
 
 import engine.entity_manager;
 import engine.asset_manager;
+import engine.action_manager;
+import engine.trigger_manager;
+import engine.input_manager;
 import engine.scene;
 import engine.atlas;
 import engine.animation;
 import engine.entity;
 
-import engine.component.position_component;
-import engine.component.movement_component;
-import engine.component.animation_component;
-import engine.component.collision_component;
-import engine.component.action_component;
-import engine.component.trigger_component;
+import engine.components.position_component;
+import engine.components.movement_component;
+import engine.components.animation_component;
+import engine.components.collision_component;
+import engine.components.action_component;
+import engine.components.trigger_component;
+import engine.components.input_component;
 
 import engine.tile;
-import engine.action_manager;
-import engine.trigger_manager;
 
 import engine.scene;
 
@@ -32,6 +34,7 @@ void open_config(SDL_Renderer* renderer,
 		 AssetManager am, 
 		 ActionManager actm,
 		 TriggerManager tm,
+		 InputManager im,
 		 ref Scene[] scenes,
 		 ref Tile[string] tiles, 
 		 string filepath) {
@@ -150,6 +153,15 @@ void open_config(SDL_Renderer* renderer,
 	    }
 	    Trigger trigger = tm.triggers[ lineArray[3] ];
 	    target.trigger.triggers ~= trigger;
+	  } else if (component_name == "keyaction") {
+	    if(target.inputs is null) {
+	      target.inputs = new InputComponent;
+	    }
+
+	    target.inputs.input[ lineArray[3]] = false;
+	    target.inputs.input[ lineArray[3]] = false;
+	    target.inputs.input[ lineArray[3]] = false;
+	    target.inputs.input[ lineArray[3]] = false;
 	  }
 
 	}
@@ -170,6 +182,9 @@ void open_config(SDL_Renderer* renderer,
 	auto trigger_type = cast(TriggerType) lineArray[2];
 	Trigger trigger = new Trigger(trigger_type, lineArray[1], lineArray[3]);
 	tm.triggers[ lineArray[1] ] = trigger;
+      } else if(lineArray[0] == "keycode") {
+	int scancode = to!int( lineArray[2]);
+	im.inputs[ scancode ] = cast(InputAction) lineArray[1];
       }
     }
     file.close();  

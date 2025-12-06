@@ -6,7 +6,7 @@ module engine.systems.collision_system;
 
 import engine.entity_manager;
 import engine.physics;
-import engine.component.collision_component;
+import engine.components.collision_component;
 
 import std.algorithm;
 import std.range;

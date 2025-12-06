@@ -1,12 +1,13 @@
 module engine.entity;
 
 class Entity {
-  import engine.component.animation_component;
-  import engine.component.position_component;
-  import engine.component.movement_component;
-  import engine.component.action_component;
-  import engine.component.collision_component;
-  import engine.component.trigger_component;
+  import engine.components.animation_component;
+  import engine.components.position_component;
+  import engine.components.movement_component;
+  import engine.components.action_component;
+  import engine.components.collision_component;
+  import engine.components.trigger_component;
+  import engine.components.input_component;
 
   MovementComponent movement;
   PositionComponent position;
@@ -14,6 +15,7 @@ class Entity {
   ActionComponent action;
   CollisionComponent collision;
   TriggerComponent trigger;
+  InputComponent inputs;
 
   int id;
   string name;

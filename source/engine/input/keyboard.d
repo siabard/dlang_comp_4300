@@ -1,6 +1,7 @@
 module engine.input.keyboard;
 
 import bindbc.sdl;
+import std.stdio;
 
 class KeyboardHandler {
   bool[int] pressed;
