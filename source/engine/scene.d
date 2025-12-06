@@ -9,7 +9,7 @@ import engine.systems.input_system;
 import engine.systems.action_system;
 import engine.systems.render_system;
 import engine.systems.movement_system;
-
+import engine.systems.collision_system;
 import engine.camera;
 
 class Scene {
@@ -22,7 +22,7 @@ class Scene {
     this.name = name;
     this.path = path;
 
-    Camera newCamera  = {x: 5, y: 5, width: 400, height: 400};
+    Camera newCamera  = {x: 0, y: 0, width: 400, height: 400};
     this.camera = newCamera;
   }
 
@@ -45,6 +45,10 @@ class Scene {
     
     // entity 의 움직임을 실제로 설정한다.
     movement_system(game.entity_manager, dt);
+
+    // 움직인 뒤에 충돌판정을 한다.
+    collision_system(game.entity_manager, game.action_manager);
+    
     action_system(game.entity_manager);
     animation_system(game.entity_manager, dt);
   }

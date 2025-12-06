@@ -9,8 +9,7 @@ action act_telpo_10_11 teleport 120 110
 # x, y 위치에 trigger type 를 설정 함
 # trigger [trigger name] [trigger type] [action name]
 
-trigger trg_telpo on-enter telpo_10_11
-
+trigger trg_telpo on-enter act_telpo_10_11
 
 # entity [entity name]
 entity player
@@ -18,7 +17,7 @@ entity warp_1
 
 # set-entity [entity name] position [x] [y]
 set-entity player position 0 0
-set-entity warp_1 position 80 80
+set-entity warp_1 position 90 90
 
 # set-entity [entity name] animation [animation key] [animation name]
 set-entity player animation right mychar_right
@@ -43,11 +42,6 @@ set-entity player keyaction move-right
 # player 는 해당 action 을 실행하면 다른 곳으로 이동할 것임
 # set-entity player action act_telpo_10_11
 
-
-# entity에 적용할 on-enter 형 telpor-1 트리거를
-# 20 30 에 설정한다
-# on-enter type은 collision component 가 있을 때 제대로 동작한다.
-# set-trigger on-enter telpor-1 20 30
 
 # set-entity [entity name] trigger [trigger name]
 
