@@ -159,9 +159,6 @@ void open_config(SDL_Renderer* renderer,
 	    }
 
 	    target.inputs.input[ lineArray[3]] = false;
-	    target.inputs.input[ lineArray[3]] = false;
-	    target.inputs.input[ lineArray[3]] = false;
-	    target.inputs.input[ lineArray[3]] = false;
 	  }
 
 	}

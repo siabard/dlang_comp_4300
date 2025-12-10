@@ -21,17 +21,21 @@ struct Bul {
   ubyte jong;
 }
 
-enum Languages {
-  Ascii,
-  Hangul,
-  HangulJamo,
-  Kana,
-  Arrow,
-  NotImplemented,
+enum Languages:string {
+  Ascii = "ascii",
+  Hangul = "hangul",
+  HangulJamo = "hangul_jamo",
+  Kana = "kana",
+  Arrow = "arrow",
+  NotImplemented = "not_implemented"
 }
 
 immutable ubyte NUM_OF_JONG = 28;
 immutable ubyte NUM_OF_MID = 21;
+
+immutable int WIDTH_FNT_HANGUL = 16;
+immutable int WIDTH_FNT_ASCII = 8;
+immutable int HEIGHT_FNT = 16;
 
 @safe Languages ucs2_languages(uint code) {
   if(code >= 0 && code <= 0x007f) {
@@ -213,7 +217,7 @@ unittest {
   import std.conv;
   import std.array;
 
-  string statement = "아름다운";
+  string statement = "아름다운ABC";
 
   auto array_utf8 = statement.map!(a => a.to!string).array;
   foreach(s; array_utf8) {
